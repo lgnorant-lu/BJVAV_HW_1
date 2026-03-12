@@ -1,0 +1,6 @@
+spring.application.name=homework
+spring.ai.openai.api-key=sk-{.*}
+spring.ai.openai.base-url=https://{domain}
+spring.ai.openai.chat.options.model=gemini-3-flash-preview
+spring.data.mongodb.uri=mongodb://localhost:27017/chatdb
+logging.level.org.springframework.data.mongodb.core.MongoTemplate=DEBUG
