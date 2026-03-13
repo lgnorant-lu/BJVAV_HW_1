@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-solar-yellow: #fef08a;
+  --color-solar-green: #4ade80;
+  --color-solar-blue: #60a5fa;
+  --color-solar-white: #ffffff;
+  --color-solar-bg: #f0fdf4;
+}
+
+:root {
+  --solar-yellow: #fef08a;
+  --solar-green: #4ade80;
+  --solar-blue: #60a5fa;
+  --solar-white: #ffffff;
+  --solar-bg: #f8fafc;
+  --text-primary: #064e3b;
+  --text-secondary: #334155;
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --bubble-user: linear-gradient(-45deg, #3b82f6, #2563eb);
+  --bubble-ai: rgba(255, 255, 255, 0.9);
+}
+
+.dark {
+  --solar-yellow: #713f12;
+  --solar-green: #064e3b;
+  --solar-blue: #1e3a8a;
+  --solar-white: #0f172a;
+  --solar-bg: #020617;
+  --text-primary: #ecfdf5;
+  --text-secondary: #94a3b8;
+  --glass-bg: rgba(15, 23, 42, 0.8);
+  --glass-border: rgba(30, 41, 59, 0.5);
+  --bubble-user: linear-gradient(-45deg, #1d4ed8, #1e40af);
+  --bubble-ai: rgba(30, 41, 59, 0.9);
+}
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  background: radial-gradient(circle at top right, rgba(254, 240, 138, 0.1) 0%, transparent 40%),
+              radial-gradient(circle at bottom left, rgba(96, 165, 250, 0.05) 0%, transparent 40%),
+              var(--solar-bg);
+  background-attachment: fixed;
+  font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: var(--text-secondary);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* 优雅的自定义滚动条 */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(74, 222, 128, 0.2); border-radius: 10px; }
+
+/* Solarpunk Glassmorphism */
+.solar-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+}
+
+/* Energy Flow Animation */
+@keyframes energy-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.energy-gradient {
+  background: linear-gradient(-45deg, #fef08a, #4ade80, #60a5fa, #4ade80);
+  background-size: 400% 400%;
+  animation: energy-flow 12s ease infinite;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
+}
+
+.solar-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+/* 交互微动效 */
+.solar-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.solar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.1);
+}
+
+.solar-btn {
+  transition: all 0.2s ease;
+}
+
+.solar-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.solar-btn:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* 消息进入动画 */
+.message-enter-active {
+  transition: all 0.4s ease-out;
+}
+.message-enter-from {
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+}

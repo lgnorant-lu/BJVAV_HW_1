@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/cs")
+@CrossOrigin(origins = "*")
 public class CustomerServiceController {
 
     private final ChatClient chatClient;
@@ -18,7 +19,7 @@ public class CustomerServiceController {
         this.chatMemory = chatMemory;
         this.contextService = contextService;
         this.chatClient = builder
-                .defaultSystem("你是一个电商平台的金牌客服。请礼貌、专业地回答用户的问题。")
+                .defaultSystem("你是一个企业级的智能服务助手。请礼貌、专业地回答用户的问题，提供高效的解决方案。")
                 .build();
     }
 
