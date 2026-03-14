@@ -1,4 +1,4 @@
-package com.example.demo.hw0312;
+package com.example.demo.chat;
 
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.messages.AssistantMessage;
@@ -32,10 +32,9 @@ public class MongoDBChatMemory implements ChatMemory {
     }
 
     @Override
-    public List<Message> get(String conversationId) {
-        // 接口不传 lastN ，默认查最近 100 条
+    public List<Message> get(String conversationId, int lastN) {
         List<MongoMessageEntity> entities = repository.findByConversationIdOrderByTimestampDesc(
-                conversationId, PageRequest.of(0, 100));
+                conversationId, PageRequest.of(0, lastN));
         
         List<Message> messages = new ArrayList<>();
         for (MongoMessageEntity entity : entities) {

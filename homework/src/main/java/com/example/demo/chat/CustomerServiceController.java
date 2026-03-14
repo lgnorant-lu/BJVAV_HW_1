@@ -1,12 +1,16 @@
-package com.example.demo.hw0312;
+package com.example.demo.chat;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.auth.RequireRole;
+import com.example.demo.auth.User;
+
 @RestController
 @RequestMapping("/api/cs")
 @CrossOrigin(origins = "*")
+@RequireRole(User.Role.PATIENT)
 public class CustomerServiceController {
 
     private final ChatClient chatClient;

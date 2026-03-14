@@ -1,4 +1,4 @@
-package com.example.demo.hw0312;
+package com.example.demo.chat;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;

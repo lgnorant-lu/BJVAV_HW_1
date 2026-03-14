@@ -26,16 +26,28 @@ export const useChatStore = defineStore('chat', () => {
   const sendMessage = async (text) => {
     if (!text.trim() || isTyping.value) return
     
+    const authStore = import.meta.glob('./auth.js')['./auth.js']().then(m => m.useAuthStore())
+    // 实际上在 Pinia 中可以直接 import
+    // 为了简单，我们直接在顶部 import 或者在这里动态获取
+    
     // 乐观更新 UI：先将用户消息推入数组
-    messages.value.push({ 
-      role: 'user', 
-      text, 
+    messages.value.push({
+      role: 'user',
+      text,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     })
     isTyping.value = true
 
     try {
-      const response = await apiClient.post(`/chat?userId=${userId.value}`, text)
+      // 动态获取 authStore 避免循环依赖（如果存在）
+      const { useAuthStore } = await import('./auth')
+      const auth = useAuthStore()
+      
+      const response = await apiClient.post(`/chat?userId=${auth.user?.userId || userId.value}`, text, {
+        headers: {
+          'Authorization': `Bearer ${auth.token}`
+        }
+      })
       messages.value.push({
         role: 'assistant',
         text: response.data,

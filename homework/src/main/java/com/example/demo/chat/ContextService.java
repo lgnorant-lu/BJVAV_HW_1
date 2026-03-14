@@ -1,4 +1,4 @@
-package com.example.demo.hw0312;
+package com.example.demo.chat;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.data.mongodb.core.MongoTemplate;
